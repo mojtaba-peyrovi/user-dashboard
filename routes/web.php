@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('backend.layouts.master');
 });
+/* cars*/
+Route::get('/cars/create', 'CarController@create');
+/*deals */
+Route::get('/deals/create', 'DealController@create');

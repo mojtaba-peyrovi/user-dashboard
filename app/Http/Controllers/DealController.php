@@ -24,7 +24,7 @@ class DealController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.deals.create');
     }
 
     /**
