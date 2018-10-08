@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Deal;
 use App\Car;
 use Illuminate\Http\Request;
-
+use MattWells\Faker\Vehicle\Provider;
+use Carbon\Carbon;
 class CarController extends Controller
 {
     /**
@@ -24,8 +25,43 @@ class CarController extends Controller
      */
     public function create()
     {
+        $car = Car::find(1);
+        // dd($car['make']);
+        $carAge = date("Y") - $car['year'];
+        $deals = Deal::where(function($query) use($car) {
+            $query->where('eligibleMake','like', '%' . $car['make'] . '%')
+                ->orWhere('eligibleMake','0');
+            })
+            ->where(function($query) use($car){
+                $query->where('eligibleModel','like', '%' . $car['model'] . '%')
+                    ->orWhere('eligibleModel','0');
+            })
+            ->where(function($query) use($car){
+                $query->where('minSumInsured', '<=' , $car['carValue'])
+                ->where('maxSumInsured', '>' , $car['carValue']);
+            })
+
+            ->where(function($query) use ($carAge) {
+            $query->where('minAge','<=', $carAge)
+            ->where('maxAge','>', $carAge);
+            })
+
+            ->get();
+
+        dd($deals);
+
+
+
+
+
+
+        // $car->deals()->sync(1);
+        // dd($deals);
+
         return view('backend.pages.cars.create');
     }
+
+    // where('make','like', '%' . $s . '%');
 
     /**
      * Store a newly created resource in storage.
