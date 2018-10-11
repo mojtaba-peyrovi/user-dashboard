@@ -1,3 +1,16 @@
+<style media="screen">
+    #navigation {
+        margin-left: 100px;
+
+    }
+    #navigation li {
+        margin-right: 30px;
+        font-size: 15px;
+        font-weight: 600px;
+        color: white
+
+    }
+</style>
 <!-- Main Header -->
 <header class="main-header">
 
@@ -19,6 +32,17 @@
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>
+
+    <ul class="nav navbar-nav" id="navigation">
+        <li>
+            <a href="/cars">Search for Cars</a>
+        </li>
+        <li>
+            <a href="/deals">Search for Deals</a>
+        </li>
+    </ul>
+
+
     <!-- Navbar Right Menu -->
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">

@@ -16,5 +16,8 @@ Route::get('/', function () {
 });
 /* cars*/
 Route::get('/cars/create', 'CarController@create');
+Route::get('cars/{car}', 'CarController@show');
 /*deals */
 Route::get('/deals/create', 'DealController@create');
+Route::get('/deals', 'DealController@index');
+Route::get('/deals/search', 'DealController@search')->name('deal-search');

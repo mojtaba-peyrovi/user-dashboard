@@ -23,10 +23,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ asset('css/backend/skin/skin-green.min.css')}} ">
-  <!--custom css -->
-  <link rel="stylesheet" href="{{ asset('css/backend/style.css') }}">
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="{{ asset('datepicker/bootstrap-datepicker.min.css') }}">
+  <!-- MDB Bootstrap core CSS -->
+  <link href="{{ asset('mdb-bootsrtap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- MDB Material Design Bootstrap -->
+  <link href="{{ asset('mdb-bootstrap/css/mdb.min.css') }}" rel="stylesheet">
+  <!--custom css -->
+  <link rel="stylesheet" href="{{ asset('css/backend/style.css') }}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,7 +63,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini"  style="background:red;">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -74,6 +78,7 @@ desired effect
     <!-- Content Header (Page header) -->
 
     @yield('content-header')
+
 
 
     <!-- Main content -->
@@ -114,6 +119,8 @@ desired effect
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
 <!-- bootstrap datepicker -->
 <script src="{{ asset('datepicker/bootstrap-datepicker.min.js') }}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{{ asset('mdb-bootstrap/js/mdb.min.js') }}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
@@ -125,7 +132,7 @@ desired effect
        autoclose: true,
        format: "yyyy",
        viewMode: "years",
-       minViewMode: "years"      
+       minViewMode: "years"
      })
  </script>
 

@@ -12,4 +12,9 @@ class Car extends Model
     {
         return $this->belongsToMany(Deal::class);
     }
+
+    public function carName()
+    {
+        return $this->year . '-'. $this->make . ' ' . $this->model;
+    }
 }

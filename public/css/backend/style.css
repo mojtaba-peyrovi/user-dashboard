@@ -1,4 +1,15 @@
+
 /*navbar */
 .logo-lg span{
     font-size:10px;
+}
+
+/* content-header */
+.content-header {
+    background: white;
+    padding-bottom: 18px;
+}
+.navbar {
+    margin-left: 100px;
+    margin-top: 16px;
 }

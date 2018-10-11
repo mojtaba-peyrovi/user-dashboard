@@ -14,7 +14,8 @@ class DealController extends Controller
      */
     public function index()
     {
-        //
+        $deals = Deal::all();
+        return view('backend.pages.deals.index', compact('deals'));
     }
 
     /**
@@ -81,5 +82,51 @@ class DealController extends Controller
     public function destroy(Deal $deal)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $make = $request->get('make');
+        $model = $request->get('model');
+        $year = $request->get('year');
+        $carAge = date("Y") - $request->get('year');
+        $location = $request->get('location');  //Bangkok- UpCountry
+        if ($location == 'Bangkok') {
+            $location_code = '1';
+        }else {
+            $location_code = '0';
+        }
+
+        $deals = Deal::where(function($query) use($make) {
+            $query->where('eligibleMake','like', '%' . $make . '%')
+                ->orWhere('eligibleMake','0');
+            })
+            ->where(function($query) use($model){
+                $query->where('eligibleModel','like', '%' . $model . '%')
+                    ->orWhere('eligibleModel','0');
+            })
+            ->where(function($query) use($location_code) {
+                $query->where('bangkok', $location_code)
+                ->where('upCountry', $location_code);
+
+            })
+            // ->where(function($query) use($model){
+            //     $query->where('eligibleModel','like', '%' . $model . '%')
+            //         ->orWhere('eligibleModel','0');
+            // })
+            // ->where(function($query) use($car){
+            //     $query->where('minSumInsured', '<=' , $car['carValue'])
+            //     ->where('maxSumInsured', '>' , $car['carValue']);
+            // })
+            //
+            ->where(function($query) use ($carAge) {
+            $query->where('minAge','<=', $carAge)
+            ->where('maxAge','>=', $carAge);
+            })
+
+            ->get();
+
+            $data = ['deals', 'make', 'model','year', 'location'];
+        return view('backend.pages.deals.results', compact($data));
     }
 }

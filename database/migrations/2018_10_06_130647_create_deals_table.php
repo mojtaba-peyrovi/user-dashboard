@@ -41,7 +41,7 @@ class CreateDealsTable extends Migration
             $table->integer('maxSumInsured');
             $table->integer('deductible');
             $table->boolean('dealerGarage');
-            $table->string('fierTheft');
+            $table->string('fireTheft');
             $table->string('flood');
             $table->integer('bodilyPerPerson');
             $table->integer('bodilyPerAcc')->defualt(10000000);

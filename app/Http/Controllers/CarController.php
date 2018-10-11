@@ -15,7 +15,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -25,39 +25,6 @@ class CarController extends Controller
      */
     public function create()
     {
-        $car = Car::find(1);
-        // dd($car['make']);
-        $carAge = date("Y") - $car['year'];
-        $deals = Deal::where(function($query) use($car) {
-            $query->where('eligibleMake','like', '%' . $car['make'] . '%')
-                ->orWhere('eligibleMake','0');
-            })
-            ->where(function($query) use($car){
-                $query->where('eligibleModel','like', '%' . $car['model'] . '%')
-                    ->orWhere('eligibleModel','0');
-            })
-            ->where(function($query) use($car){
-                $query->where('minSumInsured', '<=' , $car['carValue'])
-                ->where('maxSumInsured', '>' , $car['carValue']);
-            })
-
-            ->where(function($query) use ($carAge) {
-            $query->where('minAge','<=', $carAge)
-            ->where('maxAge','>', $carAge);
-            })
-
-            ->get();
-
-        dd($deals);
-
-
-
-
-
-
-        // $car->deals()->sync(1);
-        // dd($deals);
-
         return view('backend.pages.cars.create');
     }
 
@@ -82,7 +49,31 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+
+        $carAge = date("Y") - $car['year'];
+        $deals = Deal::where(function($query) use($car) {
+            $query->where('eligibleMake','like', '%' . $car['make'] . '%')
+                ->orWhere('eligibleMake','0');
+            })
+            ->where(function($query) use($car){
+                $query->where('eligibleModel','like', '%' . $car['model'] . '%')
+                    ->orWhere('eligibleModel','0');
+            })
+            ->where(function($query) use($car){
+                $query->where('minSumInsured', '<=' , $car['carValue'])
+                ->where('maxSumInsured', '>' , $car['carValue']);
+            })
+
+            ->where(function($query) use ($carAge) {
+            $query->where('minAge','<=', $carAge)
+            ->where('maxAge','>', $carAge);
+            })
+
+            ->get();
+
+
+
+        return view('backend.pages.cars.show', compact('deals','car'));
     }
 
     /**
